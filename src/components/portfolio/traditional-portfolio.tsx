@@ -17,6 +17,8 @@ import {
   SKILLS,
 } from "@/data/portfolio";
 import { Button } from "@/components/ui/button";
+import { SiteFooter } from "@/components/portfolio/site-footer";
+import { DigitalBusinessCard } from "@/components/portfolio/digital-business-card";
 import { Github, Linkedin, Mail, Phone } from "lucide-react";
 import { useGameStore } from "@/store/game-store";
 
@@ -417,50 +419,52 @@ export function TraditionalPortfolio() {
         <section id="contact" className="py-16">
           <h2 className="text-2xl font-semibold tracking-wide">Contact</h2>
           <p className="mt-3 text-lg text-muted">{PROFILE.contactQuote}</p>
-          <div className="mt-6 space-y-3">
-            <a
-              href={PROFILE.emailHref}
-              className="flex items-center gap-3 rounded-lg border border-panel-border p-4 hover:bg-white/5"
-            >
-              <Mail className="h-5 w-5 text-accent" />
-              {PROFILE.email}
-            </a>
-            <a
-              href={PROFILE.phoneHref}
-              className="flex items-center gap-3 rounded-lg border border-panel-border p-4 hover:bg-white/5"
-            >
-              <Phone className="h-5 w-5 text-accent" />
-              {PROFILE.phone}
-            </a>
-          </div>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Button asChild>
-              <a href={PROFILE.emailHref}>
-                <Mail className="h-4 w-4" /> EMAIL
-              </a>
-            </Button>
-            {PROFILE.linkedin && (
-              <Button variant="secondary" asChild>
-                <a href={PROFILE.linkedin} target="_blank" rel="noreferrer">
-                  <Linkedin className="h-4 w-4" /> LINKEDIN
+          <div className="mt-8 grid items-start gap-10 lg:grid-cols-[1fr_minmax(260px,420px)]">
+            <div>
+              <div className="space-y-3">
+                <a
+                  href={PROFILE.emailHref}
+                  className="flex items-center gap-3 rounded-lg border border-panel-border p-4 hover:bg-white/5"
+                >
+                  <Mail className="h-5 w-5 text-accent" />
+                  {PROFILE.email}
                 </a>
-              </Button>
-            )}
-            {PROFILE.github && (
-              <Button variant="secondary" asChild>
-                <a href={PROFILE.github} target="_blank" rel="noreferrer">
-                  <Github className="h-4 w-4" /> GITHUB
+                <a
+                  href={PROFILE.phoneHref}
+                  className="flex items-center gap-3 rounded-lg border border-panel-border p-4 hover:bg-white/5"
+                >
+                  <Phone className="h-5 w-5 text-accent" />
+                  {PROFILE.phone}
                 </a>
-              </Button>
-            )}
+              </div>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Button asChild>
+                  <a href={PROFILE.emailHref}>
+                    <Mail className="h-4 w-4" /> EMAIL
+                  </a>
+                </Button>
+                {PROFILE.linkedin && (
+                  <Button variant="secondary" asChild>
+                    <a href={PROFILE.linkedin} target="_blank" rel="noreferrer">
+                      <Linkedin className="h-4 w-4" /> LINKEDIN
+                    </a>
+                  </Button>
+                )}
+                {PROFILE.github && (
+                  <Button variant="secondary" asChild>
+                    <a href={PROFILE.github} target="_blank" rel="noreferrer">
+                      <Github className="h-4 w-4" /> GITHUB
+                    </a>
+                  </Button>
+                )}
+              </div>
+            </div>
+            <DigitalBusinessCard />
           </div>
         </section>
       </main>
 
-      {/* SEO-friendly crawlable content duplicate is the main content above */}
-      <footer className="border-t border-panel-border/60 py-8 text-center text-xs text-muted">
-        © {new Date().getFullYear()} {PROFILE.name} · {PROFILE.cityName}
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

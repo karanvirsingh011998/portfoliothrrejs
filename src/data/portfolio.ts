@@ -28,6 +28,21 @@ export const PROFILE = {
     "I use AI to accelerate development while keeping architecture, engineering decisions and code quality human-driven.",
 } as const;
 
+/** Premium 3D digital business card — contact face details */
+export const BUSINESS_CARD = {
+  name: "KARANVIR SINGH",
+  title: "Software Engineer",
+  email: "karansoftwaredev@gmail.com",
+  emailHref: "mailto:karansoftwaredev@gmail.com",
+  linkedin: "https://www.linkedin.com/in/karanvir-singh-a72a61196/",
+  linkedinLabel: "linkedin.com/in/karanvir-singh-a72a61196/",
+  portfolio: "https://karanvirsingh.vercel.app",
+  portfolioLabel: "karanvirsingh.vercel.app",
+  whatsapp: "+91 8437333427",
+  whatsappHref: "https://wa.me/918437333427",
+  whatsappQrPayload: "https://wa.me/918437333427",
+} as const;
+
 /** Animated career metrics for the stats sector */
 export const CAREER_STATS = [
   {
@@ -677,6 +692,14 @@ export const MISSIONS: Mission[] = [
     locationId: "connect-hub",
   },
 ];
+
+/** Stack credited in the site footer */
+export const BUILT_WITH = [
+  "Three.js",
+  "React",
+  "GSAP",
+  "Blender",
+] as const;
 
 export const SPAWN_POSITION: [number, number, number] = [0, 0.9, 6];
 

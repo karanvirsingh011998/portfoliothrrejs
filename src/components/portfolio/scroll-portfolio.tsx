@@ -28,6 +28,8 @@ import { BuildProcessTimeline } from "@/components/portfolio/build-process-timel
 import { ResumeCard3D } from "@/components/portfolio/resume-card-3d";
 import { CareerStats } from "@/components/portfolio/career-stats";
 import { TimeMachine } from "@/components/portfolio/time-machine";
+import { SiteFooter } from "@/components/portfolio/site-footer";
+import { DigitalBusinessCard } from "@/components/portfolio/digital-business-card";
 
 const SECTIONS = [
   { id: "home", label: "HOME", code: "00", hue: "0 200 180" },
@@ -1220,6 +1222,7 @@ export function ScrollPortfolio() {
           id="contact"
           accentRgb={SECTIONS[11].hue}
           active={active === "contact"}
+          tall
         >
           <Reveal>
             <p className="hud-label">SECTOR 11 — CONNECT HUB</p>
@@ -1232,68 +1235,78 @@ export function ScrollPortfolio() {
               {PROFILE.contactQuote}
             </p>
           </Reveal>
-          <div className="mt-8 max-w-xl space-y-3">
-            {[
-              {
-                href: PROFILE.emailHref,
-                icon: Mail,
-                label: PROFILE.email,
-              },
-              {
-                href: PROFILE.phoneHref,
-                icon: Phone,
-                label: PROFILE.phone,
-              },
-            ].map((item, i) => (
-              <Reveal key={item.label} delay={i + 2}>
-                <motion.a
-                  href={item.href}
-                  whileHover={{ x: 6, borderColor: "rgba(61,214,198,0.5)" }}
-                  className="hud-frame flex items-center gap-3 px-4 py-4"
-                >
-                  <item.icon className="h-4 w-4 text-accent" />
-                  <span className="text-sm tracking-[0.08em]">{item.label}</span>
-                </motion.a>
+
+          <div className="mt-8 grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(260px,420px)] lg:gap-12">
+            <div>
+              <div className="max-w-xl space-y-3">
+                {[
+                  {
+                    href: PROFILE.emailHref,
+                    icon: Mail,
+                    label: PROFILE.email,
+                  },
+                  {
+                    href: PROFILE.phoneHref,
+                    icon: Phone,
+                    label: PROFILE.phone,
+                  },
+                ].map((item, i) => (
+                  <Reveal key={item.label} delay={i + 2}>
+                    <motion.a
+                      href={item.href}
+                      whileHover={{ x: 6, borderColor: "rgba(61,214,198,0.5)" }}
+                      className="hud-frame flex items-center gap-3 px-4 py-4"
+                    >
+                      <item.icon className="h-4 w-4 text-accent" />
+                      <span className="text-sm tracking-[0.08em]">
+                        {item.label}
+                      </span>
+                    </motion.a>
+                  </Reveal>
+                ))}
+              </div>
+              <Reveal delay={4}>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <motion.a
+                    href={PROFILE.emailHref}
+                    whileHover={{ scale: 1.04 }}
+                    className="border border-accent bg-accent/15 px-4 py-2 text-[11px] tracking-[0.25em] text-accent"
+                  >
+                    EMAIL
+                  </motion.a>
+                  {PROFILE.linkedin && (
+                    <a
+                      href={PROFILE.linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="hud-frame px-4 py-2 text-[11px] tracking-[0.25em]"
+                    >
+                      <Linkedin className="mr-2 inline h-3 w-3" />
+                      LINKEDIN
+                    </a>
+                  )}
+                  {PROFILE.github && (
+                    <a
+                      href={PROFILE.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="hud-frame px-4 py-2 text-[11px] tracking-[0.25em]"
+                    >
+                      <Github className="mr-2 inline h-3 w-3" />
+                      GITHUB
+                    </a>
+                  )}
+                </div>
               </Reveal>
-            ))}
-          </div>
-          <Reveal delay={4}>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <motion.a
-                href={PROFILE.emailHref}
-                whileHover={{ scale: 1.04 }}
-                className="border border-accent bg-accent/15 px-4 py-2 text-[11px] tracking-[0.25em] text-accent"
-              >
-                EMAIL
-              </motion.a>
-              {PROFILE.linkedin && (
-                <a
-                  href={PROFILE.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hud-frame px-4 py-2 text-[11px] tracking-[0.25em]"
-                >
-                  <Linkedin className="mr-2 inline h-3 w-3" />
-                  LINKEDIN
-                </a>
-              )}
-              {PROFILE.github && (
-                <a
-                  href={PROFILE.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="hud-frame px-4 py-2 text-[11px] tracking-[0.25em]"
-                >
-                  <Github className="mr-2 inline h-3 w-3" />
-                  GITHUB
-                </a>
-              )}
             </div>
-          </Reveal>
+
+            <Reveal delay={3} className="mx-auto w-full lg:mx-0 lg:justify-self-end">
+              <DigitalBusinessCard />
+            </Reveal>
+          </div>
+
           <Reveal delay={5}>
-            <p className="mt-16 text-[10px] tracking-[0.2em] text-muted">
-              © {new Date().getFullYear()} {PROFILE.name.toUpperCase()}
-            </p>
+            <SiteFooter />
           </Reveal>
         </SectionShell>
       </div>
