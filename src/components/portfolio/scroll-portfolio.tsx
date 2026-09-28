@@ -139,16 +139,23 @@ function SectionShell({
   children,
   accentRgb,
   active,
+  tall = false,
 }: {
   id: string;
   children: React.ReactNode;
   accentRgb: string;
   active: boolean;
+  /** Tall sections (e.g. many project cards) — start-align + softer snap on mobile */
+  tall?: boolean;
 }) {
   return (
     <section
       id={id}
-      className="relative flex min-h-[100dvh] w-full snap-start snap-always flex-col justify-center px-5 py-24 sm:px-10 lg:px-16"
+      className={`relative flex min-h-[100dvh] w-full snap-start flex-col px-5 sm:px-10 lg:px-16 ${
+        tall
+          ? "justify-start pt-36 pb-32 snap-normal sm:justify-center sm:py-24 sm:snap-always"
+          : "justify-center pt-36 pb-24 snap-always sm:py-24"
+      }`}
     >
       <FloatingOrbs accent={accentRgb} />
       <motion.div
@@ -330,9 +337,9 @@ export function ScrollPortfolio() {
       />
 
       {/* Fixed HUD */}
-      <header className="pointer-events-none fixed inset-x-0 top-0 z-40 flex items-start justify-between gap-4 p-4 pt-3 sm:p-5 sm:pt-4">
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-40 flex items-start justify-between gap-3 p-3 pt-3 sm:gap-4 sm:p-5 sm:pt-4">
         <motion.div
-          className="pointer-events-auto hud-frame hud-scan max-w-[min(340px,calc(100vw-5rem))] px-4 py-3"
+          className="pointer-events-auto hud-frame hud-chrome hud-scan max-w-[min(340px,calc(100vw-5.5rem))] px-3 py-2.5 sm:px-4 sm:py-3"
           key={active}
           initial={reduce ? false : { opacity: 0.6, y: -6 }}
           animate={{ opacity: 1, y: 0 }}
@@ -358,8 +365,8 @@ export function ScrollPortfolio() {
               className="mt-3 sys-terminal text-[10px] text-muted"
             >
               <div className="flex justify-between gap-2">
-                <span>SECTOR</span>
-                <span className="text-accent">
+                <span className="shrink-0">SECTOR</span>
+                <span className="min-w-0 truncate text-right text-accent">
                   {activeMeta.code} — {activeMeta.label}
                 </span>
               </div>
@@ -372,13 +379,13 @@ export function ScrollPortfolio() {
         </motion.div>
 
         <div className="pointer-events-auto flex flex-col items-end gap-2">
-          <div className="hud-frame hidden px-3 py-2 text-[10px] tracking-[0.25em] text-muted sm:block">
+          <div className="hud-frame hud-chrome hidden px-3 py-2 text-[10px] tracking-[0.25em] text-muted sm:block">
             {PROFILE.worldCodename}
           </div>
           <button
             type="button"
             onClick={() => setMenuOpen((v) => !v)}
-            className="hud-frame px-4 py-2 text-[11px] tracking-[0.3em] text-accent hover:bg-accent/10"
+            className="hud-frame hud-chrome px-4 py-2 text-[11px] tracking-[0.3em] text-accent hover:bg-accent/10"
           >
             {menuOpen ? "CLOSE" : "MENU"}
           </button>
@@ -439,7 +446,7 @@ export function ScrollPortfolio() {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
-            className="hud-frame px-3 py-2 text-[10px] tracking-[0.18em] text-muted"
+            className="hud-frame hud-chrome px-3 py-2 text-[10px] tracking-[0.18em] text-muted"
           >
             SECTOR {activeMeta.code} — {activeMeta.label}
           </motion.div>
@@ -515,7 +522,7 @@ export function ScrollPortfolio() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 overflow-y-auto bg-black/90 p-4 backdrop-blur-md sm:p-8"
+            className="fixed inset-0 z-50 overflow-y-auto overscroll-contain bg-black/90 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur-md sm:p-8"
           >
             <motion.div
               initial={{ y: 40, opacity: 0 }}
@@ -528,13 +535,13 @@ export function ScrollPortfolio() {
                 <button
                   type="button"
                   onClick={() => setProjectId(null)}
-                  className="hud-frame px-4 py-2 text-[11px] tracking-[0.25em] text-accent"
+                  className="hud-frame shrink-0 px-4 py-2 text-[11px] tracking-[0.25em] text-accent"
                 >
                   CLOSE
                 </button>
               </div>
-              <div className="hud-frame hud-scan p-6 sm:p-8">
-                <h2 className="hud-title text-2xl sm:text-3xl">
+              <div className="hud-frame hud-scan p-5 sm:p-8">
+                <h2 className="hud-title break-words text-xl sm:text-3xl">
                   {selectedProject.name.toUpperCase()}
                 </h2>
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -595,7 +602,7 @@ export function ScrollPortfolio() {
       {/* Scroll container */}
       <div
         ref={scrollerRef}
-        className="h-[100dvh] snap-y snap-mandatory overflow-y-auto overflow-x-hidden scroll-smooth"
+        className="h-[100dvh] snap-y snap-proximity overflow-y-auto overflow-x-hidden scroll-smooth sm:snap-mandatory"
       >
         {/* HOME */}
         <SectionShell
@@ -746,6 +753,7 @@ export function ScrollPortfolio() {
           id="projects"
           accentRgb={SECTIONS[2].hue}
           active={active === "projects"}
+          tall
         >
           <Reveal>
             <p className="hud-label">SECTOR 02 — PROJECT GARAGE</p>
@@ -754,11 +762,11 @@ export function ScrollPortfolio() {
             <h2 className="hud-title mt-3 text-3xl sm:text-5xl">PROJECTS</h2>
           </Reveal>
           <motion.div
-            className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
+            className="mt-6 grid gap-3 sm:mt-8 sm:grid-cols-2 lg:grid-cols-3"
             variants={stagger}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: false, amount: 0.15 }}
           >
             {PROJECTS.map((project, i) => (
               <motion.button
@@ -769,7 +777,7 @@ export function ScrollPortfolio() {
                 whileHover={{ y: -6, scale: 1.015 }}
                 whileTap={{ scale: 0.985 }}
                 onClick={() => setProjectId(project.id)}
-                className="hud-frame hud-scan group p-5 text-left"
+                className="hud-frame hud-scan group p-4 text-left sm:p-5"
               >
                 <div className="flex justify-between gap-2">
                   <p className="hud-label">BAY {String(i + 1).padStart(2, "0")}</p>

@@ -83,6 +83,70 @@ export const EXPERIENCE: ExperienceRole[] = [
 
 export const PROJECTS: Project[] = [
   {
+    id: "horsetelex-pedigree",
+    name: "HorseTelex Pedigree",
+    stack: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "shadcn/ui",
+      "Supabase",
+      "i18next",
+      "React Hook Form",
+      "Zod",
+    ],
+    description:
+      "Production Next.js platform for searching horse pedigrees, breeding tools, competition data, and sales listings — with secure API proxying, auth, and 11-language i18n.",
+    keyFeatures: [
+      "PEDIGREE SEARCH",
+      "API PROXY",
+      "AUTH",
+      "i18n ×11",
+      "SALES / LEASE",
+      "SEO",
+    ],
+    missionObjective:
+      "Ship an international equestrian pedigree and breeding platform with secure backends and full localization.",
+    liveDemo: null,
+    github: null,
+    archetype: "portal",
+    caseStudy: {
+      problem:
+        "Horse breeders and riders needed a single international web app to search pedigrees, analyze bloodlines, and explore performance and sales data across languages.",
+      solution:
+        "Built a Next.js 16 / React 19 / TypeScript App Router platform with server-side API proxying, cookie-based auth, Supabase-backed sales, and i18next localization across 11 languages.",
+      architecture:
+        "Next.js App Router with a secure API proxy so clients never see upstream credentials; middleware-protected routes (same-origin / token checks); HTTP-only auth and refresh cookies; Supabase for sales/lease with mock-data fallbacks in local/dev.",
+      features: [
+        "Pedigree search, horse detail pages, and breeding tools (virtual mating, inbreeding)",
+        "Competition results, auctions, and sales/lease listings",
+        "Auth flows (login, refresh, protected member areas) via React Context and HTTP-only cookies",
+        "i18n for 11 languages with hydration-safe client patterns",
+        "Complex UI: pedigree trees, offspring filters/pagination, event calendar, searchable listings",
+        "SEO (sitemaps, robots, canonical URLs, JSON-LD) and Web Vitals-minded rendering",
+      ],
+      technology: [
+        "Next.js 16",
+        "React 19",
+        "TypeScript",
+        "Tailwind CSS 4",
+        "shadcn/ui",
+        "Supabase",
+        "i18next",
+        "React Hook Form",
+        "Zod",
+      ],
+      challenges: [
+        "Keeping upstream credentials off the client via a secure proxy and middleware checks",
+        "Avoiding SSR/CSR mismatches across 11-language i18n hydration",
+        "Merging sales/lease with Supabase while supporting local/dev without backend config",
+      ],
+      outcome:
+        "Delivered a production equestrian platform covering pedigrees, breeding tools, competition data, and sales — secured, localized, and SEO-ready.",
+    },
+  },
+  {
     id: "jc-automax-admin",
     name: "JC Automax — Admin Portal",
     stack: ["React", "Node.js", "MongoDB", "Tailwind", "shadcn/ui"],
@@ -91,7 +155,7 @@ export const PROJECTS: Project[] = [
     keyFeatures: ["INVENTORY", "USERS", "PARTNERS", "RBAC", "ANALYTICS"],
     missionObjective:
       "Build a complete management system for vehicles, users and partners.",
-    liveDemo: null,
+    liveDemo: "https://jcautomax.com/",
     github: null,
     archetype: "showroom",
     caseStudy: {
@@ -125,7 +189,7 @@ export const PROJECTS: Project[] = [
     keyFeatures: ["LANDING", "BRAND", "RESPONSIVE", "SECTIONS"],
     missionObjective:
       "Ship a modern public web presence for automotive services and brand identity.",
-    liveDemo: null,
+    liveDemo: "https://jcautomax.com/",
     github: null,
     archetype: "portal",
     caseStudy: {
@@ -156,7 +220,7 @@ export const PROJECTS: Project[] = [
     keyFeatures: ["ROUTES", "PACKAGES", "TRACKING", "API LAYER"],
     missionObjective:
       "Deliver end-to-end postal and logistics workflows on a MERN stack.",
-    liveDemo: null,
+    liveDemo: "https://postkodes.com/",
     github: null,
     archetype: "logistics",
     caseStudy: {
@@ -187,7 +251,7 @@ export const PROJECTS: Project[] = [
     keyFeatures: ["SSR ROUTES", "SERVICES", "HEALTH UI", "API BRIDGE"],
     missionObjective:
       "Build a health-focused Next.js application with Node.js service integration.",
-    liveDemo: null,
+    liveDemo: "https://flahyhealth.com/",
     github: null,
     archetype: "medtech",
     caseStudy: {

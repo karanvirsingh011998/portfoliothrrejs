@@ -21,17 +21,20 @@ import type { Project } from "@/types/portfolio";
 function ExitBar({ label }: { label: string }) {
   const returnToWorld = useGameStore((s) => s.returnToWorld);
   return (
-    <div className="pointer-events-auto fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-4 py-3 sm:px-6">
-      <div className="hud-frame px-3 py-2">
+    <div className="pointer-events-auto fixed left-0 right-0 top-0 z-50 flex items-start justify-between gap-3 px-4 py-3 sm:items-center sm:px-6">
+      <div className="hud-frame min-w-0 flex-1 px-3 py-2">
         <p className="hud-label">{PROFILE.systemId}</p>
-        <p className="mt-0.5 text-[11px] tracking-[0.2em] text-foreground">{label}</p>
+        <p className="mt-0.5 truncate text-[11px] tracking-[0.2em] text-foreground">
+          {label}
+        </p>
       </div>
       <button
         type="button"
         onClick={returnToWorld}
-        className="hud-frame px-4 py-2 text-[11px] tracking-[0.28em] text-accent hover:bg-accent/10"
+        className="hud-frame shrink-0 px-3 py-2 text-[10px] tracking-[0.2em] text-accent hover:bg-accent/10 sm:px-4 sm:text-[11px] sm:tracking-[0.28em]"
       >
-        ← RETURN TO CITY
+        ← RETURN
+        <span className="hidden sm:inline"> TO CITY</span>
       </button>
     </div>
   );
@@ -64,7 +67,7 @@ function ExperienceInterior() {
         }}
       />
 
-      <div className="pointer-events-auto relative mx-auto flex h-full max-w-6xl flex-col justify-center gap-4 px-4 pb-8 pt-20 sm:gap-6">
+      <div className="pointer-events-auto relative mx-auto flex h-full max-w-6xl flex-col justify-start gap-4 overflow-y-auto overscroll-contain px-4 pb-8 pt-20 sm:justify-center sm:gap-6">
         <AnimatePresence mode="wait">
           <motion.div
             key={role.company}
@@ -168,15 +171,17 @@ function ExperienceInterior() {
 function ProjectDetailOS({ project, onBack }: { project: Project; onBack: () => void }) {
   return (
     <div className="interior-shell">
-      <div className="pointer-events-auto fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-4 py-3 sm:px-6">
-        <div className="hud-frame px-3 py-2">
+      <div className="pointer-events-auto fixed left-0 right-0 top-0 z-50 flex items-start justify-between gap-3 px-4 py-3 sm:items-center sm:px-6">
+        <div className="hud-frame min-w-0 flex-1 px-3 py-2">
           <p className="hud-label">PROJECT.OS — CASE STUDY</p>
-          <p className="text-[11px] tracking-[0.15em]">{project.name.toUpperCase()}</p>
+          <p className="truncate text-[11px] tracking-[0.15em]">
+            {project.name.toUpperCase()}
+          </p>
         </div>
         <button
           type="button"
           onClick={onBack}
-          className="hud-frame px-4 py-2 text-[11px] tracking-[0.25em] text-accent"
+          className="hud-frame shrink-0 px-4 py-2 text-[11px] tracking-[0.25em] text-accent"
         >
           ← GARAGE
         </button>
@@ -184,76 +189,78 @@ function ProjectDetailOS({ project, onBack }: { project: Project; onBack: () => 
 
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(232,160,102,0.12),transparent_55%),#030712]" />
 
-      <div className="pointer-events-auto relative mx-auto grid h-full max-w-6xl gap-4 px-4 pb-8 pt-20 lg:grid-cols-2">
-        <div className="hud-frame hud-scan flex flex-col justify-center p-6 sm:p-8">
-          <p className="hud-label">ENVIRONMENT</p>
-          <div className="mt-6 flex flex-1 flex-col items-center justify-center">
-            <div className="relative flex h-48 w-full max-w-sm items-center justify-center border border-accent-warm/30 bg-accent-warm/5">
-              <div className="absolute left-2 top-2 h-3 w-3 border-l border-t border-accent-warm" />
-              <div className="absolute bottom-2 right-2 h-3 w-3 border-b border-r border-accent-warm" />
-              <p className="hud-title text-center text-xl text-accent-warm">
-                {project.archetype.toUpperCase()}
-              </p>
-            </div>
-            <div className="mt-6 flex flex-wrap justify-center gap-2">
-              {project.stack.map((s) => (
-                <span key={s} className="sys-chip-warm sys-chip">
-                  {s}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="hud-frame hud-scan overflow-y-auto p-6 sm:p-8">
-          <p className="hud-label">MISSION BRIEF</p>
-          <div className="mt-4 space-y-4 sys-terminal text-[12px]">
-            <div>
-              <p className="text-accent">PROBLEM</p>
-              <p className="mt-1 text-muted">{project.caseStudy.problem}</p>
-            </div>
-            <div>
-              <p className="text-accent">SOLUTION</p>
-              <p className="mt-1 text-muted">{project.caseStudy.solution}</p>
-            </div>
-            <div>
-              <p className="text-accent">ARCHITECTURE</p>
-              <p className="mt-1 text-muted">{project.caseStudy.architecture}</p>
-            </div>
-            <div>
-              <p className="text-accent">CHALLENGES</p>
-              <ul className="mt-1 space-y-1 text-muted">
-                {project.caseStudy.challenges.map((c) => (
-                  <li key={c}>▸ {c}</li>
+      <div className="pointer-events-auto relative mx-auto h-full max-w-6xl overflow-y-auto overscroll-contain px-4 pb-10 pt-20">
+        <div className="grid min-h-0 gap-4 lg:grid-cols-2 lg:min-h-[calc(100dvh-7rem)]">
+          <div className="hud-frame hud-scan flex flex-col justify-center p-5 sm:p-8">
+            <p className="hud-label">ENVIRONMENT</p>
+            <div className="mt-6 flex flex-1 flex-col items-center justify-center">
+              <div className="relative flex h-36 w-full max-w-sm items-center justify-center border border-accent-warm/30 bg-accent-warm/5 sm:h-48">
+                <div className="absolute left-2 top-2 h-3 w-3 border-l border-t border-accent-warm" />
+                <div className="absolute bottom-2 right-2 h-3 w-3 border-b border-r border-accent-warm" />
+                <p className="hud-title text-center text-xl text-accent-warm">
+                  {project.archetype.toUpperCase()}
+                </p>
+              </div>
+              <div className="mt-6 flex flex-wrap justify-center gap-2">
+                {project.stack.map((s) => (
+                  <span key={s} className="sys-chip-warm sys-chip">
+                    {s}
+                  </span>
                 ))}
-              </ul>
-            </div>
-            <div>
-              <p className="text-accent">OUTCOME</p>
-              <p className="mt-1 text-muted">{project.caseStudy.outcome}</p>
+              </div>
             </div>
           </div>
-          <div className="mt-6 flex flex-wrap gap-2">
-            {project.liveDemo && (
-              <a
-                href={project.liveDemo}
-                target="_blank"
-                rel="noreferrer"
-                className="sys-chip hover:bg-accent/20"
-              >
-                LIVE DEMO
-              </a>
-            )}
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noreferrer"
-                className="sys-chip hover:bg-accent/20"
-              >
-                GITHUB
-              </a>
-            )}
+
+          <div className="hud-frame hud-scan p-5 sm:overflow-y-auto sm:p-8 lg:max-h-[calc(100dvh-7rem)]">
+            <p className="hud-label">MISSION BRIEF</p>
+            <div className="mt-4 space-y-4 sys-terminal text-[12px]">
+              <div>
+                <p className="text-accent">PROBLEM</p>
+                <p className="mt-1 text-muted">{project.caseStudy.problem}</p>
+              </div>
+              <div>
+                <p className="text-accent">SOLUTION</p>
+                <p className="mt-1 text-muted">{project.caseStudy.solution}</p>
+              </div>
+              <div>
+                <p className="text-accent">ARCHITECTURE</p>
+                <p className="mt-1 text-muted">{project.caseStudy.architecture}</p>
+              </div>
+              <div>
+                <p className="text-accent">CHALLENGES</p>
+                <ul className="mt-1 space-y-1 text-muted">
+                  {project.caseStudy.challenges.map((c) => (
+                    <li key={c}>▸ {c}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p className="text-accent">OUTCOME</p>
+                <p className="mt-1 text-muted">{project.caseStudy.outcome}</p>
+              </div>
+            </div>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {project.liveDemo && (
+                <a
+                  href={project.liveDemo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="sys-chip hover:bg-accent/20"
+                >
+                  LIVE DEMO
+                </a>
+              )}
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="sys-chip hover:bg-accent/20"
+                >
+                  GITHUB
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>

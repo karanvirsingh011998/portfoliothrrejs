@@ -49,18 +49,36 @@ export function TraditionalPortfolio() {
               </a>
             ))}
           </nav>
-          {webglOk && (
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => {
-                setForce2D(false);
-                setPhase("intro");
-              }}
-            >
-              Enter 3D World
-            </Button>
-          )}
+          <div className="flex items-center gap-2">
+            <details className="relative md:hidden">
+              <summary className="cursor-pointer list-none rounded border border-panel-border px-3 py-1.5 text-xs tracking-[0.15em] text-muted marker:content-none [&::-webkit-details-marker]:hidden">
+                MENU
+              </summary>
+              <div className="absolute right-0 z-50 mt-2 min-w-[10rem] rounded-lg border border-panel-border bg-background/95 p-2 shadow-lg backdrop-blur-md">
+                {sections.map((s) => (
+                  <a
+                    key={s.id}
+                    href={`#${s.id}`}
+                    className="block rounded px-3 py-2 text-xs tracking-[0.15em] text-muted hover:bg-accent/10 hover:text-accent"
+                  >
+                    {s.label.toUpperCase()}
+                  </a>
+                ))}
+              </div>
+            </details>
+            {webglOk && (
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => {
+                  setForce2D(false);
+                  setPhase("intro");
+                }}
+              >
+                Enter 3D World
+              </Button>
+            )}
+          </div>
         </div>
       </header>
 

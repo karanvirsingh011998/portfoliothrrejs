@@ -72,6 +72,13 @@ body {
   );
 }
 
+/** Fixed HUD chrome — opaque so scrolling section titles never bleed through */
+.hud-chrome {
+  background: rgba(4, 7, 15, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
 .hud-frame::before,
 .hud-frame::after {
   content: "";
@@ -141,7 +148,7 @@ body {
 
 .hud-scan {
   position: relative;
-  overflow: hidden;
+  /* Avoid forcing overflow:hidden so scrollable panels (e.g. case studies) can use overflow-y-auto */
 }
 
 .hud-scan::after {
