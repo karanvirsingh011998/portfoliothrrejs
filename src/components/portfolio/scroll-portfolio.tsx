@@ -9,7 +9,7 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import { Github, Linkedin, Mail, Phone } from "lucide-react";
+import { FileDown, FileText, Github, Linkedin, Mail, Phone } from "lucide-react";
 import {
   AI_NODES,
   AI_TOOLS,
@@ -24,16 +24,24 @@ import {
   SKILLS,
 } from "@/data/portfolio";
 import { RotatingRole } from "@/components/portfolio/rotating-role";
+import { BuildProcessTimeline } from "@/components/portfolio/build-process-timeline";
+import { ResumeCard3D } from "@/components/portfolio/resume-card-3d";
+import { CareerStats } from "@/components/portfolio/career-stats";
+import { TimeMachine } from "@/components/portfolio/time-machine";
 
 const SECTIONS = [
   { id: "home", label: "HOME", code: "00", hue: "0 200 180" },
   { id: "experience", label: "EXPERIENCE", code: "01", hue: "91 141 239" },
-  { id: "projects", label: "PROJECTS", code: "02", hue: "232 160 102" },
-  { id: "skills", label: "TECH STACK", code: "03", hue: "61 214 198" },
-  { id: "ai", label: "AI LAB", code: "04", hue: "167 139 250" },
-  { id: "performance", label: "PERFORMANCE", code: "05", hue: "74 222 128" },
-  { id: "education", label: "EDUCATION", code: "06", hue: "251 191 36" },
-  { id: "contact", label: "CONTACT", code: "07", hue: "251 113 133" },
+  { id: "stats", label: "CAREER STATS", code: "02", hue: "56 189 248" },
+  { id: "timemachine", label: "TIME MACHINE", code: "03", hue: "45 212 191" },
+  { id: "projects", label: "PROJECTS", code: "04", hue: "232 160 102" },
+  { id: "process", label: "HOW I BUILD", code: "05", hue: "94 234 212" },
+  { id: "skills", label: "TECH STACK", code: "06", hue: "61 214 198" },
+  { id: "ai", label: "AI LAB", code: "07", hue: "167 139 250" },
+  { id: "performance", label: "PERFORMANCE", code: "08", hue: "74 222 128" },
+  { id: "education", label: "EDUCATION", code: "09", hue: "251 191 36" },
+  { id: "resume", label: "RESUME", code: "10", hue: "125 211 252" },
+  { id: "contact", label: "CONTACT", code: "11", hue: "251 113 133" },
 ] as const;
 
 type SectionId = (typeof SECTIONS)[number]["id"];
@@ -646,6 +654,27 @@ export function ScrollPortfolio() {
               >
                 BEGIN — EXPERIENCE
               </motion.button>
+              <motion.a
+                href={PROFILE.resumeUrl}
+                target="_blank"
+                rel="noreferrer"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                className="hud-frame inline-flex items-center gap-2 px-6 py-3 text-[11px] tracking-[0.3em]"
+              >
+                <FileText className="h-3.5 w-3.5 text-accent" />
+                VIEW RESUME
+              </motion.a>
+              <motion.a
+                href={PROFILE.resumeUrl}
+                download="Karanvir-Singh-Resume.pdf"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                className="hud-frame inline-flex items-center gap-2 px-6 py-3 text-[11px] tracking-[0.3em]"
+              >
+                <FileDown className="h-3.5 w-3.5 text-accent" />
+                DOWNLOAD PDF ↓
+              </motion.a>
               <motion.button
                 type="button"
                 whileHover={{ scale: 1.03 }}
@@ -748,15 +777,58 @@ export function ScrollPortfolio() {
           </div>
         </SectionShell>
 
+        {/* CAREER STATS */}
+        <SectionShell
+          id="stats"
+          accentRgb={SECTIONS[2].hue}
+          active={active === "stats"}
+        >
+          <Reveal>
+            <p className="hud-label">SECTOR 02 — TELEMETRY</p>
+          </Reveal>
+          <Reveal delay={1}>
+            <h2 className="hud-title mt-3 text-3xl sm:text-5xl">CAREER STATS</h2>
+          </Reveal>
+          <Reveal delay={2}>
+            <p className="mt-4 max-w-xl text-sm text-muted">
+              A snapshot of the work so far — years shipping, projects delivered,
+              and the stack that keeps growing.
+            </p>
+          </Reveal>
+          <CareerStats />
+        </SectionShell>
+
+        {/* TIME MACHINE */}
+        <SectionShell
+          id="timemachine"
+          accentRgb={SECTIONS[3].hue}
+          active={active === "timemachine"}
+          tall
+        >
+          <Reveal>
+            <p className="hud-label">SECTOR 03 — TEMPORAL RAIL</p>
+          </Reveal>
+          <Reveal delay={1}>
+            <h2 className="hud-title mt-3 text-3xl sm:text-5xl">TIME MACHINE</h2>
+          </Reveal>
+          <Reveal delay={2}>
+            <p className="mt-4 max-w-xl text-sm text-muted">
+              Drag through the years. Each stop is a chapter — from foundations
+              to what I&apos;m shipping now.
+            </p>
+          </Reveal>
+          <TimeMachine />
+        </SectionShell>
+
         {/* PROJECTS */}
         <SectionShell
           id="projects"
-          accentRgb={SECTIONS[2].hue}
+          accentRgb={SECTIONS[4].hue}
           active={active === "projects"}
           tall
         >
           <Reveal>
-            <p className="hud-label">SECTOR 02 — PROJECT GARAGE</p>
+            <p className="hud-label">SECTOR 04 — PROJECT GARAGE</p>
           </Reveal>
           <Reveal delay={1}>
             <h2 className="hud-title mt-3 text-3xl sm:text-5xl">PROJECTS</h2>
@@ -807,14 +879,36 @@ export function ScrollPortfolio() {
           </motion.div>
         </SectionShell>
 
+        {/* HOW I BUILD */}
+        <SectionShell
+          id="process"
+          accentRgb={SECTIONS[5].hue}
+          active={active === "process"}
+          tall
+        >
+          <Reveal>
+            <p className="hud-label">SECTOR 05 — BUILD PIPELINE</p>
+          </Reveal>
+          <Reveal delay={1}>
+            <h2 className="hud-title mt-3 text-3xl sm:text-5xl">HOW I BUILD</h2>
+          </Reveal>
+          <Reveal delay={2}>
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted">
+              Not just visually impressive interfaces — a repeatable process from
+              idea to deployment. Scroll to move through the pipeline.
+            </p>
+          </Reveal>
+          <BuildProcessTimeline scrollContainer={scrollerRef} />
+        </SectionShell>
+
         {/* SKILLS */}
         <SectionShell
           id="skills"
-          accentRgb={SECTIONS[3].hue}
+          accentRgb={SECTIONS[6].hue}
           active={active === "skills"}
         >
           <Reveal>
-            <p className="hud-label">SECTOR 03 — DEV LAB</p>
+            <p className="hud-label">SECTOR 06 — DEV LAB</p>
           </Reveal>
           <Reveal delay={1}>
             <h2 className="hud-title mt-3 text-3xl sm:text-5xl">TECH STACK</h2>
@@ -881,11 +975,11 @@ export function ScrollPortfolio() {
         {/* AI */}
         <SectionShell
           id="ai"
-          accentRgb={SECTIONS[4].hue}
+          accentRgb={SECTIONS[7].hue}
           active={active === "ai"}
         >
           <Reveal>
-            <p className="hud-label">SECTOR 04 — AI LAB</p>
+            <p className="hud-label">SECTOR 07 — AI LAB</p>
           </Reveal>
           <Reveal delay={1}>
             <h2 className="hud-title mt-3 text-3xl sm:text-5xl">AI DEVELOPMENT</h2>
@@ -976,11 +1070,11 @@ export function ScrollPortfolio() {
         {/* PERFORMANCE */}
         <SectionShell
           id="performance"
-          accentRgb={SECTIONS[5].hue}
+          accentRgb={SECTIONS[8].hue}
           active={active === "performance"}
         >
           <Reveal>
-            <p className="hud-label">SECTOR 05 — PERFORMANCE CENTER</p>
+            <p className="hud-label">SECTOR 08 — PERFORMANCE CENTER</p>
           </Reveal>
           <Reveal delay={1}>
             <h2 className="hud-title mt-3 text-3xl sm:text-5xl">PERFORMANCE</h2>
@@ -1033,11 +1127,11 @@ export function ScrollPortfolio() {
         {/* EDUCATION */}
         <SectionShell
           id="education"
-          accentRgb={SECTIONS[6].hue}
+          accentRgb={SECTIONS[9].hue}
           active={active === "education"}
         >
           <Reveal>
-            <p className="hud-label">SECTOR 06 — UNIVERSITY</p>
+            <p className="hud-label">SECTOR 09 — UNIVERSITY</p>
           </Reveal>
           <Reveal delay={1}>
             <h2 className="hud-title mt-3 text-3xl sm:text-5xl">EDUCATION</h2>
@@ -1061,14 +1155,74 @@ export function ScrollPortfolio() {
           </div>
         </SectionShell>
 
+        {/* RESUME */}
+        <SectionShell
+          id="resume"
+          accentRgb={SECTIONS[10].hue}
+          active={active === "resume"}
+        >
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            <div>
+              <Reveal>
+                <p className="hud-label">SECTOR 10 — CREDENTIALS</p>
+              </Reveal>
+              <Reveal delay={1}>
+                <h2 className="hud-title mt-3 text-3xl sm:text-5xl">MY RESUME</h2>
+              </Reveal>
+              <Reveal delay={2}>
+                <p className="mt-4 max-w-md text-sm leading-relaxed text-muted sm:text-base">
+                  A quick overview of my experience &amp; capabilities.
+                </p>
+              </Reveal>
+              <Reveal delay={3}>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <motion.a
+                    href={PROFILE.resumeUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="inline-flex items-center gap-2 border border-accent bg-accent/15 px-5 py-3 text-[11px] tracking-[0.28em] text-accent hover:bg-accent/25"
+                  >
+                    <FileText className="h-3.5 w-3.5" />
+                    VIEW RESUME
+                  </motion.a>
+                  <motion.a
+                    href={PROFILE.resumeUrl}
+                    download="Karanvir-Singh-Resume.pdf"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="hud-frame inline-flex items-center gap-2 px-5 py-3 text-[11px] tracking-[0.28em]"
+                  >
+                    <FileDown className="h-3.5 w-3.5 text-accent" />
+                    DOWNLOAD PDF ↓
+                  </motion.a>
+                </div>
+              </Reveal>
+            </div>
+
+            <Reveal delay={2} className="flex justify-center lg:justify-end">
+              <a
+                href={PROFILE.resumeUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                aria-label="View resume PDF"
+              >
+                <ResumeCard3D />
+              </a>
+            </Reveal>
+          </div>
+        </SectionShell>
+
         {/* CONTACT */}
         <SectionShell
           id="contact"
-          accentRgb={SECTIONS[7].hue}
+          accentRgb={SECTIONS[11].hue}
           active={active === "contact"}
         >
           <Reveal>
-            <p className="hud-label">SECTOR 07 — CONNECT HUB</p>
+            <p className="hud-label">SECTOR 11 — CONNECT HUB</p>
           </Reveal>
           <Reveal delay={1}>
             <h2 className="hud-title mt-3 text-3xl sm:text-5xl">CONTACT</h2>

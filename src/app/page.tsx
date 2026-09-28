@@ -1,10 +1,13 @@
 import { PortfolioExperience } from "@/components/portfolio/portfolio-experience";
 import {
+  BUILD_PROCESS,
+  CAREER_STATS,
   EDUCATION,
   EXPERIENCE,
   PROFILE,
   PROJECTS,
   SKILLS,
+  TIME_MACHINE,
 } from "@/data/portfolio";
 
 /**
@@ -33,6 +36,25 @@ export default function HomePage() {
               <p>{role.highlights.join(", ")}</p>
             </div>
           ))}
+          <h2>Career Stats</h2>
+          <ul>
+            {CAREER_STATS.map((stat) => (
+              <li key={stat.id}>
+                {"display" in stat && stat.display
+                  ? stat.display
+                  : `${stat.value}${stat.suffix}`}{" "}
+                — {stat.label}
+              </li>
+            ))}
+          </ul>
+          <h2>Time Machine</h2>
+          <ol>
+            {TIME_MACHINE.map((era) => (
+              <li key={era.year}>
+                <strong>{era.year} — {era.title}</strong>: {era.summary}
+              </li>
+            ))}
+          </ol>
           <h2>Projects</h2>
           {PROJECTS.map((p) => (
             <div key={p.id}>
@@ -41,6 +63,14 @@ export default function HomePage() {
               <p>{p.stack.join(", ")}</p>
             </div>
           ))}
+          <h2>How I Build</h2>
+          <ol>
+            {BUILD_PROCESS.map((step) => (
+              <li key={step.id}>
+                <strong>{step.title}</strong> — {step.summary}
+              </li>
+            ))}
+          </ol>
           <h2>Skills</h2>
           <p>{SKILLS.join(", ")}</p>
           <h2>Education</h2>
@@ -50,6 +80,10 @@ export default function HomePage() {
               <p>{e.institution} · {e.period}</p>
             </div>
           ))}
+          <h2>Resume</h2>
+          <p>
+            <a href={PROFILE.resumeUrl}>View / download resume (PDF)</a>
+          </p>
           <h2>Contact</h2>
           <p>
             <a href={PROFILE.emailHref}>{PROFILE.email}</a>

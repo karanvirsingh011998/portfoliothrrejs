@@ -6,6 +6,9 @@ import {
   AI_WORKFLOW,
   ARCHITECTURE_FLOW,
   ARCHITECTURE_SIDES,
+  BUILD_PROCESS,
+  CAREER_STATS,
+  TIME_MACHINE,
   EDUCATION,
   EXPERIENCE,
   PERFORMANCE_TOPICS,
@@ -21,10 +24,14 @@ const sections = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
   { id: "experience", label: "Experience" },
+  { id: "stats", label: "Career Stats" },
+  { id: "timemachine", label: "Time Machine" },
   { id: "projects", label: "Projects" },
+  { id: "process", label: "How I Build" },
   { id: "skills", label: "Skills" },
   { id: "ai", label: "AI" },
   { id: "education", label: "Education" },
+  { id: "resume", label: "Resume" },
   { id: "contact", label: "Contact" },
 ] as const;
 
@@ -138,6 +145,58 @@ export function TraditionalPortfolio() {
           </div>
         </section>
 
+        <section id="stats" className="py-16">
+          <h2 className="text-2xl font-semibold tracking-wide">Career Stats</h2>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {CAREER_STATS.map((stat) => (
+              <article
+                key={stat.id}
+                className="rounded-xl border border-panel-border bg-white/[0.03] p-6 text-center"
+              >
+                <p className="text-4xl font-semibold tracking-tight text-accent">
+                  {"display" in stat && stat.display
+                    ? stat.display
+                    : `${stat.value}${stat.suffix}`}
+                </p>
+                <p className="mt-2 text-xs tracking-[0.2em] text-muted">
+                  {stat.label}
+                </p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="timemachine" className="py-16">
+          <h2 className="text-2xl font-semibold tracking-wide">Time Machine</h2>
+          <p className="mt-4 max-w-3xl text-muted">
+            Drag through the years — each stop is a chapter of the career.
+          </p>
+          <ol className="mt-8 space-y-4">
+            {TIME_MACHINE.map((era) => (
+              <li
+                key={era.year}
+                className="rounded-xl border border-panel-border bg-white/[0.03] p-5"
+              >
+                <div className="flex flex-wrap items-baseline gap-3">
+                  <span className="font-mono text-sm text-accent">{era.year}</span>
+                  <h3 className="font-semibold tracking-wide">{era.title}</h3>
+                </div>
+                <p className="mt-2 text-sm text-muted">{era.summary}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {era.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded border border-accent/20 bg-accent/10 px-2 py-1 text-xs"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+
         <section id="projects" className="py-16">
           <h2 className="text-2xl font-semibold tracking-wide">Projects</h2>
           <div className="mt-8 grid gap-5 md:grid-cols-2">
@@ -211,6 +270,35 @@ export function TraditionalPortfolio() {
               </article>
             ))}
           </div>
+        </section>
+
+        <section id="process" className="py-16">
+          <h2 className="text-2xl font-semibold tracking-wide">How I Build</h2>
+          <p className="mt-4 max-w-3xl text-muted">
+            A repeatable process from idea to deployment — not just polished UI,
+            but intentional engineering.
+          </p>
+          <ol className="mt-8 space-y-4">
+            {BUILD_PROCESS.map((step, i) => (
+              <li
+                key={step.id}
+                className="rounded-xl border border-panel-border bg-white/[0.03] p-5"
+              >
+                <div className="flex items-baseline gap-3">
+                  <span className="font-mono text-xs tracking-[0.2em] text-accent">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="font-semibold tracking-wide">{step.title}</h3>
+                </div>
+                <p className="mt-2 text-sm text-muted">{step.summary}</p>
+                {i < BUILD_PROCESS.length - 1 && (
+                  <p className="mt-3 text-[10px] tracking-[0.3em] text-accent/70">
+                    ↓ NEXT
+                  </p>
+                )}
+              </li>
+            ))}
+          </ol>
         </section>
 
         <section id="skills" className="py-16">
@@ -304,6 +392,25 @@ export function TraditionalPortfolio() {
                 <p className="mt-1 font-mono text-xs text-muted">{edu.period}</p>
               </article>
             ))}
+          </div>
+        </section>
+
+        <section id="resume" className="py-16">
+          <h2 className="text-2xl font-semibold tracking-wide">My Resume</h2>
+          <p className="mt-4 max-w-2xl text-muted">
+            A quick overview of my experience &amp; capabilities.
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Button asChild>
+              <a href={PROFILE.resumeUrl} target="_blank" rel="noreferrer">
+                View Resume
+              </a>
+            </Button>
+            <Button variant="outline" asChild>
+              <a href={PROFILE.resumeUrl} download="Karanvir-Singh-Resume.pdf">
+                Download PDF ↓
+              </a>
+            </Button>
           </div>
         </section>
 

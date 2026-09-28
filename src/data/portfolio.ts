@@ -22,10 +22,90 @@ export const PROFILE = {
   emailHref: "mailto:karanvir011998@gmail.com",
   linkedin: "https://www.linkedin.com/in/karanvir-singh-a72a61196/",
   github: "https://github.com/karanvirsingh011998",
+  resumeUrl: "/resume.pdf",
   contactQuote: "Let's build something worth shipping.",
   aiStatement:
     "I use AI to accelerate development while keeping architecture, engineering decisions and code quality human-driven.",
 } as const;
+
+/** Animated career metrics for the stats sector */
+export const CAREER_STATS = [
+  {
+    id: "years",
+    value: 4,
+    suffix: "+",
+    label: "YEARS BUILDING",
+    accent: "91 141 239",
+  },
+  {
+    id: "projects",
+    value: 20,
+    suffix: "+",
+    label: "PROJECTS",
+    accent: "232 160 102",
+  },
+  {
+    id: "technologies",
+    value: 10,
+    suffix: "+",
+    label: "TECHNOLOGIES",
+    accent: "61 214 198",
+  },
+  {
+    id: "curiosity",
+    value: null,
+    suffix: "",
+    label: "CURIOSITY",
+    display: "∞",
+    accent: "167 139 250",
+  },
+] as const;
+
+/** Draggable career timeline — Time Machine sector */
+export const TIME_MACHINE = [
+  {
+    year: 2021,
+    title: "FOUNDATIONS",
+    summary:
+      "Sharpening fundamentals after MCA — personal builds, problem-solving, and preparing for production work.",
+    tags: ["JavaScript", "DSA", "Web fundamentals"],
+  },
+  {
+    year: 2022,
+    title: "FIRST SHIP",
+    summary:
+      "Joined Wits Innovation Lab as a MERN Stack Developer. Built real products with auth, APIs, and dashboards.",
+    tags: ["MERN", "JWT", "MongoDB", "REST"],
+  },
+  {
+    year: 2023,
+    title: "DEPTH",
+    summary:
+      "Owned fuller product surfaces — RBAC, Socket.io, CI/CD, and shipping features end-to-end.",
+    tags: ["RBAC", "Socket.io", "CI/CD", "OAuth"],
+  },
+  {
+    year: 2024,
+    title: "LEVEL UP",
+    summary:
+      "Closed the WIL chapter, joined Lumino Guru. Shifted deeper into Next.js, architecture, and mentoring.",
+    tags: ["Next.js", "Architecture", "Mentoring"],
+  },
+  {
+    year: 2025,
+    title: "CRAFT",
+    summary:
+      "Production Next.js systems, performance work, and AI-assisted development with human-owned decisions.",
+    tags: ["SSR/SSG", "Performance", "TypeScript", "AI workflows"],
+  },
+  {
+    year: 2026,
+    title: "NOW",
+    summary:
+      "Shipping polished full-stack experiences — pedigrees to logistics — with process, polish, and curiosity.",
+    tags: ["Full-stack", "Product", "Shipping"],
+  },
+] as const;
 
 /** Hero rotating roles — fixed slot, no layout shift */
 export const HERO_ROLES = [
@@ -401,6 +481,45 @@ export const AI_WORKFLOW = [
   "TEST",
   "REFACTOR",
   "SHIP",
+] as const;
+
+/** End-to-end product build process — "How I Build" */
+export const BUILD_PROCESS = [
+  {
+    id: "idea",
+    title: "IDEA",
+    summary: "Clarify the problem, users, and the outcome that matters.",
+  },
+  {
+    id: "research",
+    title: "RESEARCH",
+    summary: "Map constraints, APIs, competitors, and technical trade-offs.",
+  },
+  {
+    id: "design",
+    title: "DESIGN",
+    summary: "Structure information architecture, flows, and UI direction.",
+  },
+  {
+    id: "prototype",
+    title: "PROTOTYPE",
+    summary: "Validate interactions early before committing to full build.",
+  },
+  {
+    id: "development",
+    title: "DEVELOPMENT",
+    summary: "Ship production-ready features with clean architecture.",
+  },
+  {
+    id: "optimization",
+    title: "OPTIMIZATION",
+    summary: "Tune performance, accessibility, SEO, and Core Web Vitals.",
+  },
+  {
+    id: "deployment",
+    title: "DEPLOYMENT",
+    summary: "Release confidently with CI/CD, monitoring, and iteration.",
+  },
 ] as const;
 
 export const PERFORMANCE_TOPICS = [
